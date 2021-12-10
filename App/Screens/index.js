@@ -2,27 +2,52 @@ import axios from 'axios';
 import * as React from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
+import Kabar from '../Components/Index/kabar';
 import Menu from '../Components/Index/menu';
 import Pool from '../Components/Index/pool';
 import Prices from '../Components/Index/prices';
 import Colors from '../Helper/Colors';
+import Config from '../Helper/Config';
 
 const Index = ()=>{
 
   const [prices,setPrices] = React.useState();
+  const [post,setPost] = React.useState();
 
   const getPrices = ()=>{
-    axios.get('https://app.jala.tech/api/shrimp_prices')
+    axios.get('/shrimp_prices',{
+      params:{
+        with:'region,creator'
+      }
+    })
     .then(response=>{
-      setPrices(response.data.data)
+      setPrices(response.data.data);
     })
     .catch(e=>{
       Alert.alert('Terjadi kesalahan','Gagal untuk memuat harga udang terbaru')
     })
   }
 
+  const getPost = ()=>{
+    axios.get('/posts',{
+      params:{
+        with:'author'
+      }
+    })
+    .then(response=>{
+      setPost(response.data.data);
+    })
+    .catch(e=>{
+      console.log(e.response);
+      Alert.alert('Terjadi kesalahan','Gagal untuk memuat kabar udang terbaru')
+    })
+  }
+
   React.useEffect(()=>{
+    Config.setAuthorization();
+    Config.setDefaultUrl();
     getPrices();
+    getPost();
   },[])
 
   return (
@@ -41,6 +66,9 @@ const Index = ()=>{
       />
       <Prices
         data={prices}
+      />
+      <Kabar
+        data={post}
       />
     </ScrollView>
   )
