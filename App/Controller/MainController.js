@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { getFocusedRouteNameFromRoute } from "@react-navigation/core";
 import BotttomNavigator from './BottomController';
+import PriceDetail from '../Screens/prices/detail';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,13 @@ export default function MainController({ navigation, route }) {
             component={BotttomNavigator}
             options={{
               headerShown:false,
+            }}
+        />
+        <Stack.Screen
+            name="PriceDetail"
+            component={PriceDetail}
+            options={{
+              headerTitle:"Detail Harga",
             }}
         />
     </Stack.Navigator>
