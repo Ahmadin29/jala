@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 import * as React from 'react';
-import { ActivityIndicator, Alert, Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Linking, Platform, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Divider } from 'react-native-elements';
 import Text from "../../Components/Text";
 import Verified from '../../../assets/images/icon/verified.svg';
@@ -85,6 +85,18 @@ export default function PriceDetail(params) {
         )
     }
 
+    const makeCall = (phone)=>{
+        let phoneNumber = '';
+
+        if (Platform.OS === 'android') {
+            phoneNumber = `tel:${phone}`;
+        } else {
+            phoneNumber = `telprompt:${phone}`;
+        }
+
+        Linking.openURL(phoneNumber);
+    }
+
     if (detail) {
         return(
             <ScrollView style={{
@@ -158,7 +170,7 @@ export default function PriceDetail(params) {
                             backgroundColor:Colors.primaryColor,
                             borderRadius:200,
                         }} onPress={()=>{
-
+                            makeCall(detail.creator.phone);
                         }} >
                             <Text weight="semi" color={Colors.whiteColor} >Hubungi</Text>
                         </TouchableOpacity>
