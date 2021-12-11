@@ -13,7 +13,6 @@ import { useNavigation } from '@react-navigation/native';
 export default function SinglePrices(props) {
 
     const navigation = useNavigation();
-
     const price = props.data
 
     return(
@@ -22,9 +21,10 @@ export default function SinglePrices(props) {
             backgroundColor:Colors.whiteColor,
             padding:10,
             margin:15,
-            marginRight:0,
+            marginBottom:props.list ? 0 : 15,
+            marginRight:10,
             borderRadius:10,
-            minWidth:Layout.window.width / 3 * 2
+            minWidth:props.list ? Layout.window.width - 330 : Layout.window.width / 3 * 2
         }} >
             <View style={{
                 marginBottom:15,
@@ -65,6 +65,7 @@ export default function SinglePrices(props) {
                         }
                     </View>
                     <Text color={Colors.secondaryTextColor} >Supplier</Text>
+                    <Text color={Colors.secondaryTextColor} >{price.region.regency_name && price.region.regency_name+' - '}{price.region.province_name}</Text>
                 </View>
             </View>
 
@@ -78,8 +79,8 @@ export default function SinglePrices(props) {
                 borderTopColor:Colors.grey2
             }} >
                 <View>
-                    <Text size={12} color={Colors.secondaryTextColor} >Size 100</Text>
-                    <Text size={17} weight='semi' >Rp {Config.setNumber(price.size_100)}</Text>
+                    <Text size={12} color={Colors.secondaryTextColor} >Size {props.size ? props.size : "100"}</Text>
+                    <Text size={17} weight='semi' >Rp {Config.setNumber(props.size ? price['size_'+props.size] : price.size_100)}</Text>
                 </View>
                 <TouchableOpacity style={{
                     padding:7,
