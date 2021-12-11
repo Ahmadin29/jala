@@ -6,8 +6,11 @@ import Text from "../Text";
 import SinglePrices from '../prices/single';
 import moment from 'moment';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Prices(props) {
+
+    const navigation = useNavigation();
 
     const [prices,setPrices] = React.useState();
 
@@ -39,7 +42,9 @@ export default function Prices(props) {
                         }
                     </View>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    navigation.navigate('Prices')
+                }} >
                     <Text weight="semi" color={Colors.primaryColor} >Lihat Semua</Text>
                 </TouchableOpacity>
             </View>
