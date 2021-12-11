@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as React from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { Divider } from 'react-native-elements';
-import Kabar from '../Components/Index/kabar';
+import Posts from '../Components/Index/posts';
 import Menu from '../Components/Index/menu';
 import Pool from '../Components/Index/pool';
 import Prices from '../Components/Index/prices';
@@ -67,7 +67,7 @@ const Index = ()=>{
       <Prices
         data={prices}
       />
-      <Kabar
+      <Posts
         data={post}
       />
     </ScrollView>
