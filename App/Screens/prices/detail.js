@@ -72,7 +72,9 @@ export default function PriceDetail(params) {
                         flexDirection:"row",
                         alignItems:"center",
                         marginVertical:5,
-                    }} >
+                    }}
+                    key={v.size}
+                    >
                         <View style={{
                             width:100,
                         }} >
