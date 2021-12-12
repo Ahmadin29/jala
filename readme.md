@@ -17,7 +17,7 @@ npm install
 expo start
 ```
 ## About Project
-Time to finish : 8 Hours 36 Mins (Wakatime Tracker)
+Time to finish : 8 Hours 36 Mins (Wakatime Tracker). <br/>
 Project Link : [https://github.com/Ahmadin29/jala](https://github.com/Ahmadin29/jala)
 
 ## Contributing
