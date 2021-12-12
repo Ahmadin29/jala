@@ -8,11 +8,13 @@ import Pool from '../Components/Index/pool';
 import Prices from '../Components/Index/prices';
 import Colors from '../Helper/Colors';
 import Config from '../Helper/Config';
+import Diseas from '../Components/Index/diseas';
 
 const Index = ()=>{
 
   const [prices,setPrices] = React.useState();
   const [post,setPost] = React.useState();
+  const [diseas,setDiseas] = React.useState();
 
   const getPrices = ()=>{
     axios.get('/shrimp_prices',{
@@ -31,7 +33,8 @@ const Index = ()=>{
   const getPost = ()=>{
     axios.get('/posts',{
       params:{
-        with:'author'
+        with:'author',
+        per_page:4,
       }
     })
     .then(response=>{
@@ -43,11 +46,28 @@ const Index = ()=>{
     })
   }
 
+  const getDiseas = ()=>{
+    axios.get('/diseases',{
+      params:{
+        with:'author',
+        per_page:4,
+      }
+    })
+    .then(response=>{
+      setDiseas(response.data.data);
+    })
+    .catch(e=>{
+      console.log(e);
+      Alert.alert('Terjadi kesalahan','Gagal untuk memuat kabar udang terbaru')
+    })
+  }
+
   React.useEffect(()=>{
     Config.setAuthorization();
     Config.setDefaultUrl();
     getPrices();
     getPost();
+    getDiseas();
   },[])
 
   return (
@@ -69,6 +89,9 @@ const Index = ()=>{
       />
       <Posts
         data={post}
+      />
+      <Diseas
+        data={diseas}
       />
     </ScrollView>
   )
