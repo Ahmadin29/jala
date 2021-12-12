@@ -80,7 +80,7 @@ export default function SinglePrices(props) {
             }} >
                 <View>
                     <Text size={12} color={Colors.secondaryTextColor} >Size {props.size ? props.size : "100"}</Text>
-                    <Text size={17} weight='semi' >Rp {Config.setNumber(props.size ? price['size_'+props.size] : price.size_100)}</Text>
+                    <Text size={17} weight='semi' >Rp {Config.setNumber(props.size ? price['size_'+props.size] ? price['size_'+props.size] : '-' : price.size_100)}</Text>
                 </View>
                 <TouchableOpacity style={{
                     padding:7,
